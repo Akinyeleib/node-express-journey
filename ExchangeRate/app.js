@@ -6,16 +6,25 @@ const port = 3000;
 
 app.get('/', (req, res) => {
     
-    const amount = amount;
+    const amount = 25;
     const from = 'GBP';
     const to = 'JPY';
-    const API_KEY = 'tf632wemlVcDz38U2B7evcZsB0fm0CwS';
-    const url = `https://api.exchangeratesapi.io/v1/convert?access_key=${API_KEY}&from=${from}&to=${to}&amount=${amount}`
+    const API_KEY = 'ad1d4a9f76ab44bd804629301becf695';
+
+    
+    const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`
+    // console.log(url);
 
     https.get(url, (response) => {
+
         response.on('data', (data) => {
-            res.send(data);
-        })
+            // console.log(JSON.parse(data));
+            const result = JSON.parse(data).motd;
+            // console.log(result.query);
+            // res.send(result);
+        });
+
+        res.send("Yes");
     });
 
 });
