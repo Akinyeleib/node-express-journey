@@ -18,10 +18,13 @@ app.get('/users', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-    const userId = uuidv4();
-    const createdUser = req.body;
-    users.push({...createdUser, id:userId});
-    res.send(`User with name ${createdUser.firstname} added to the database`)
+    
+  const userId = uuidv4();
+  const createdUser = req.body;
+  const userWithId = {...createdUser, id:userId};
+   
+  users.push(userWithId);
+  res.send(`User with name ${createdUser.firstname} added to the database`)
 });
   
 app.listen(3000, () => {
