@@ -22,12 +22,26 @@ app.post('/currency', (req, res) => {
     console.log(url)
 
     https.get(url, (response) =>{
+
+    let rawData = ''
+    response.on("data", function(data){
+        rawData = `${rawData}${data}`
+    })
+    response.on("end", function() {
+        const apidata = JSON.parse(rawData)
+        console.log(apidata)
+    })
+        
+/*
         // console.log(response)
         response.on('data', (data) => {
+
             // console.log(JSON.parse(data));
             const result = JSON.parse(data);
-            console.log("complete")
+            // console.log("complete")
+        
         });
+*/
     });
     
     res.send("<h1>Currency Page</h1>");
